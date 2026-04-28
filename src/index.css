@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Sora", sans-serif;
+  --font-body: "Inter", sans-serif;
+  
+  --color-brand-orange: #FF6A1A;
+  --color-brand-blue: #2563EB;
+  --color-brand-heading: #353535;
+  --color-brand-body: #5D5D5D;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-brand-body font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-brand-heading;
+  }
+
+  h1 {
+    @apply text-[clamp(48px,8vw,104px)] leading-[0.95] tracking-[-1px];
+  }
+
+  h2 {
+    @apply text-[clamp(32px,5vw,56px)] leading-none tracking-[-1px];
+  }
+
+  p {
+    @apply text-[18px] leading-[1.65] tracking-[-0.5px] text-brand-body;
+  }
+}
+
+@layer components {
+  .cta-primary {
+    @apply bg-brand-orange text-white rounded-full px-6 py-3.5 font-semibold text-base tracking-[-0.3px] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(255,106,26,0.24)];
+  }
+
+  .cta-secondary {
+    @apply border border-brand-body text-brand-body rounded-full px-6 py-3.5 font-semibold text-base tracking-[-0.3px] transition-all duration-300 hover:bg-gray-50;
+  }
+
+  .pill {
+    @apply px-4 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-600 hover:border-brand-orange hover:text-brand-orange transition-colors;
+  }
+}
+
+.markdown-body {
+  @apply text-brand-body leading-relaxed;
+}

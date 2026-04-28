@@ -6,13 +6,13 @@ export default function Footer() {
   return (
     <div className="bg-[#121212]">
       {/* Transition Section */}
-      <div className="w-full flex flex-col bg-white gap-1">
+      <div className="w-full flex flex-col bg-white gap-[2px]">
         {transitionLines.map((_, i) => (
           <div 
             key={i} 
             className="w-full bg-[#121212]" 
             style={{ 
-              height: `${4 + (8 * i) / 19}px`, 
+              height: `${4 + i * 2}px`, 
               opacity: (i + 1) / 20 
             }} 
           />

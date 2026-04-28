@@ -10,8 +10,10 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
   const [isAmp, setIsAmp] = useState(false);
   
   useEffect(() => {
-    const ampTimer = setTimeout(() => setIsAmp(true), 1500);
-    const endTimer = setTimeout(() => onComplete(), 2800);
+    // Start the '&' transformation sooner
+    const ampTimer = setTimeout(() => setIsAmp(true), 1200);
+    // Extend the splash screen so the slow 2.4s beep has time to cycle!
+    const endTimer = setTimeout(() => onComplete(), 3600);
     return () => {
       clearTimeout(ampTimer);
       clearTimeout(endTimer);
@@ -49,7 +51,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
               {isO ? (
                 <motion.span
                   animate={isAmp ? { color: ["#FF5C00", "#111111", "#FF5C00"] } : {}}
-                  transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
                   className={isAmp ? "inline-block" : ""}
                 >
                   {isAmp ? "&" : "O"}

@@ -27,7 +27,7 @@ export default function Hero() {
               It’s <span className="text-brand-heading">U </span>
               <motion.span 
                 animate={{ color: ["#FF5C00", "#111111", "#FF5C00"] }}
-                transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
                 className="inline-block font-bold text-brand-orange"
               >
                 &

@@ -80,31 +80,27 @@ export default function Promise() {
       } as ScrollTrigger.Vars,
     });
 
-    // Create a scrubbing timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container.current,
-        start: "top top",
-        end: "+=150%", // User has to scroll 1.5x viewport height to see all text
-        scrub: 1, // Smooth scrubbing
-        pin: true,
-      }
-    });
-
-    // Each group gets revealed sequentially in the timeline
-    groupRefs.current.forEach((groupEl) => {
+    // Each group gets its own ScrollTrigger
+    groupRefs.current.forEach((groupEl, i) => {
       if (!groupEl) return;
       const lines = groupEl.querySelectorAll(".line-item");
 
       // Start hidden
       gsap.set(lines, { opacity: 0, y: 30 });
 
-      tl.to(lines, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.2, // slight stagger for lines within the same group
-        ease: "power2.out",
+      ScrollTrigger.create({
+        trigger: groupEl,
+        start: "top 87%",
+        once: true,
+        onEnter: () => {
+          gsap.to(lines, {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            stagger: 0.1,
+            ease: "power3.out",
+          });
+        },
       });
     });
 
@@ -116,9 +112,9 @@ export default function Promise() {
   return (
     <section
       ref={container}
-      className="bg-[#F9F9F9] py-32 px-6 md:px-12 min-h-screen flex items-center justify-center"
+      className="bg-[#F9F9F9] py-32 px-6 md:px-12 min-h-[60vh]"
     >
-      <div className="max-w-6xl mx-auto flex flex-col items-start gap-0 w-full">
+      <div className="max-w-6xl mx-auto flex flex-col items-start gap-0">
         {/* Label */}
         <div
           ref={labelRef}
@@ -128,24 +124,22 @@ export default function Promise() {
         </div>
 
         {/* Line groups */}
-        <div className="w-full">
-          {LINES.map((group, gi) => (
-            <div
-              key={gi}
-              ref={(el) => { groupRefs.current[gi] = el; }}
-              className="mb-0"
-            >
-              {group.map((line, li) => (
-                <div
-                  key={li}
-                  className="line-item text-[clamp(24px,3.5vw,46px)] leading-[1.35] font-heading text-brand-heading tracking-[-0.5px] md:tracking-[-1px] font-medium"
-                >
-                  {renderLine(line)}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+        {LINES.map((group, gi) => (
+          <div
+            key={gi}
+            ref={(el) => { groupRefs.current[gi] = el; }}
+            className="mb-0"
+          >
+            {group.map((line, li) => (
+              <div
+                key={li}
+                className="line-item text-[clamp(24px,3.5vw,46px)] leading-[1.35] font-heading text-brand-heading tracking-[-0.5px] md:tracking-[-1px] font-medium"
+              >
+                {renderLine(line)}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </section>
   );

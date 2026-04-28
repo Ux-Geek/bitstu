@@ -18,7 +18,7 @@ const TEAM = [
 
 export default function Team() {
   return (
-    <section className="py-32 px-6 md:px-12 bg-white border-y border-gray-100">
+    <section id="team" className="py-32 px-6 md:px-12 bg-white border-y border-gray-100">
       <div className="max-w-7xl mx-auto">
         <h2 className="mb-20">Two women in STEM. One vision.</h2>
         

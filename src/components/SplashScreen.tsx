@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 
 interface SplashScreenProps {
@@ -7,12 +7,15 @@ interface SplashScreenProps {
 
 export default function SplashScreen({ onComplete }: SplashScreenProps) {
   const letters = ["A", "E", "U", "O", "I"];
+  const [isAmp, setIsAmp] = useState(false);
   
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onComplete();
-    }, 2800);
-    return () => clearTimeout(timer);
+    const ampTimer = setTimeout(() => setIsAmp(true), 1500);
+    const endTimer = setTimeout(() => onComplete(), 2800);
+    return () => {
+      clearTimeout(ampTimer);
+      clearTimeout(endTimer);
+    };
   }, [onComplete]);
 
   return (
@@ -23,25 +26,40 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
       className="fixed inset-0 z-50 flex items-center justify-center bg-white"
     >
       <div className="flex gap-4 md:gap-8">
-        {letters.map((letter, i) => (
-          <motion.span
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ 
-              opacity: (letter === "U" || letter === "I") ? 1 : [0, 1, 1, 0],
-              y: 0 
-            }}
-            transition={{ 
-              duration: 1.5,
-              delay: i * 0.1,
-              times: [0, 0.2, 0.8, 1],
-              ease: "circOut"
-            }}
-            className="text-[clamp(64px,15vw,180px)] font-heading font-bold text-brand-heading"
-          >
-            {letter}
-          </motion.span>
-        ))}
+        {letters.map((letter, i) => {
+          const isO = letter === "O";
+          const stay = letter === "U" || letter === "I" || isO;
+
+          return (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ 
+                opacity: stay ? 1 : [0, 1, 1, 0],
+                y: 0 
+              }}
+              transition={{ 
+                duration: 1.5,
+                delay: i * 0.1,
+                times: [0, 0.2, 0.8, 1],
+                ease: "circOut"
+              }}
+              className="text-[clamp(64px,15vw,180px)] font-heading font-bold text-brand-heading"
+            >
+              {isO ? (
+                <motion.span
+                  animate={isAmp ? { color: ["#FF5C00", "#111111", "#FF5C00"] } : {}}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                  className={isAmp ? "inline-block" : ""}
+                >
+                  {isAmp ? "&" : "O"}
+                </motion.span>
+              ) : (
+                letter
+              )}
+            </motion.span>
+          );
+        })}
       </div>
     </motion.div>
   );

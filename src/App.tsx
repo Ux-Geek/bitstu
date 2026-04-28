@@ -12,7 +12,6 @@ import Promise from "./components/Promise";
 import ImageBreak from "./components/ImageBreak";
 import WhatWeBuild from "./components/WhatWeBuild";
 import Team from "./components/Team";
-import GetInvolved from "./components/GetInvolved";
 import Footer from "./components/Footer";
 
 export default function App() {
@@ -33,7 +32,6 @@ export default function App() {
             <ImageBreak />
             <WhatWeBuild />
             <Team />
-            <GetInvolved />
             <Footer />
           </motion.div>
         )}

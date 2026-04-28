@@ -1,10 +1,24 @@
-import Logo from "./assets/Logo.svg";
-
 export default function Footer() {
+  const transitionLines = Array.from({ length: 12 });
+
   return (
     <div className="bg-[#121212]">
-      {/* CTA Section wrapper with subtle background */}
-      <section className="py-24 px-6 md:px-12 bg-white relative">
+      {/* Transition Section */}
+      <div className="w-full flex flex-col bg-white">
+        {transitionLines.map((_, i) => (
+          <div 
+            key={i} 
+            className="w-full bg-[#121212]" 
+            style={{ 
+              height: `${1 + (3 * i) / 11}px`, 
+              opacity: (i + 1) / 12 
+            }} 
+          />
+        ))}
+      </div>
+
+      {/* CTA Section wrapper */}
+      <section className="py-24 px-6 md:px-12 bg-[#121212] relative">
         <div className="max-w-7xl mx-auto">
           {/* Dark CTA Block */}
           <div className="bg-[#18181A] rounded-2xl p-12 md:p-20 relative overflow-hidden flex flex-col items-start justify-center min-h-[400px] border border-gray-800">
@@ -38,15 +52,19 @@ export default function Footer() {
               <div className="bg-transparent"></div>
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-10 max-w-3xl relative z-10 leading-[1.1]">
-              Ready to free up<br/>your data team?
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 max-w-3xl relative z-10 leading-[1.1]">
+              Ground floor is open.
             </h2>
-            <div className="flex flex-wrap gap-4 relative z-10">
-              <button className="bg-[#6B46C1] hover:bg-[#553C9A] text-white px-8 py-3.5 rounded-lg font-medium transition-colors">
-                Start for free
+            <p className="text-xl text-white/70 mb-10 max-w-2xl relative z-10 font-body">
+              We’re in our pre-seed stage and looking for people who believe AI should serve people — not replace them.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 relative z-10 mb-12">
+              <button className="cta-primary !rounded-lg !px-8">
+                Book a Call
               </button>
               <button className="bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-3.5 rounded-lg font-medium transition-colors">
-                Try live demo
+                Email Us
               </button>
             </div>
           </div>
@@ -69,14 +87,17 @@ export default function Footer() {
               
               {/* Badges placeholder (mimicking G2 awards) */}
               <div className="grid grid-cols-2 gap-4 max-w-[240px]">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="aspect-square bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg flex flex-col items-center justify-center p-3 relative overflow-hidden group hover:border-[#3A3A3A] transition-colors">
-                    <div className="absolute top-0 right-0 w-6 h-6 bg-[#FF5C00] rounded-bl-lg flex items-center justify-center">
-                      <span className="text-[10px] font-bold text-white">G</span>
+                {["Designers", "Early Customers", "Pre-Seed Investors", "Engineers"].map((category) => (
+                  <div 
+                    key={category} 
+                    className="aspect-square bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg flex flex-col items-center justify-center p-3 relative overflow-hidden group transition-all duration-300 opacity-40 hover:opacity-100 hover:border-brand-orange/50 hover:shadow-[0_0_20px_rgba(255,92,0,0.1)]"
+                  >
+                    <div className="absolute top-0 right-0 w-6 h-6 bg-white/10 group-hover:bg-brand-orange rounded-bl-lg flex items-center justify-center transition-colors">
+                      <span className="text-[10px] font-bold text-white">B</span>
                     </div>
-                    <span className="text-[10px] text-white/40 mb-1">SPRING 2026</span>
-                    <span className="text-xs font-bold text-center leading-tight">High<br/>Performer</span>
-                    <div className="w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 absolute bottom-0 left-0" />
+                    <span className="text-[10px] text-white/40 mb-1">OPEN NOW</span>
+                    <span className="text-xs font-bold text-center leading-tight uppercase tracking-tight group-hover:text-white transition-colors">{category}</span>
+                    <div className="w-full h-1 bg-white/5 group-hover:bg-brand-orange absolute bottom-0 left-0 transition-colors" />
                   </div>
                 ))}
               </div>

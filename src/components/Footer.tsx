@@ -1,17 +1,19 @@
+import Logo from "./assets/Logo.svg";
+
 export default function Footer() {
-  const transitionLines = Array.from({ length: 12 });
+  const transitionLines = Array.from({ length: 20 });
 
   return (
     <div className="bg-[#121212]">
       {/* Transition Section */}
-      <div className="w-full flex flex-col bg-white">
+      <div className="w-full flex flex-col bg-white gap-1">
         {transitionLines.map((_, i) => (
           <div 
             key={i} 
             className="w-full bg-[#121212]" 
             style={{ 
-              height: `${1 + (3 * i) / 11}px`, 
-              opacity: (i + 1) / 12 
+              height: `${4 + (8 * i) / 19}px`, 
+              opacity: (i + 1) / 20 
             }} 
           />
         ))}

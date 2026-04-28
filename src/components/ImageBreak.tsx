@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import BreakImage from "./assets/6831e4e6-8930-455c-8448-7c909d87c41c.jpeg";
 
 export default function ImageBreak() {
   const ref = useRef(null);
@@ -18,11 +19,11 @@ export default function ImageBreak() {
             style={{ y }}
             className="absolute inset-0 z-0"
           >
-            {/* Using a clear white bg portrait portrait image with a strong focus */}
+            {/* Using the local image asset */}
             <img
-              src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=2670"
+              src={BreakImage}
               alt="Human interaction focus"
-              className="w-full h-[120%] object-cover object-top transition-all duration-700"
+              className="w-full h-[120%] object-cover object-center transition-all duration-700"
             />
             {/* Darker overlay on hover */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-700" />

@@ -15,18 +15,18 @@ const LINES = [
   ],
   // Group 1
   [
-    { text: "Every system we design carries one non-negotiable constraint:", emphasized: false },
-    { text: "it must feel ", emphasized: false, suffix: "human", suffixOrange: true, after: ". Not human-like. Not almost-human." },
+    { text: "Every system we design carries one non-negotiable constraint: it must feel ", suffix: "human", suffixOrange: true, emphasized: false },
+    { text: "", emphasized: false, after: "Not human-like. Not almost-human." },
   ],
   // Group 2
   [
-    { text: "", prefix: "Human.", prefixOrange: true, after: " We call this ", suffix: "Human Hospitality", suffixOrange: true, suffixAfter: " —" },
-    { text: "the principle that no matter how autonomous our agents become," },
+    { text: "We call this ", suffix: "Human Hospitality ", suffixOrange: true, suffixAfter: " — the principle that" },
+    { text: "no matter how autonomous our agents become," },
   ],
   // Group 3
   [
-    { text: "they will always carry the warmth, care, and intentionality" },
-    { text: "of a real person on the other side." },
+    { text: "they will always carry the warmth, care, and intentionality of a real person on the other side." },
+    // { text: "of a real person on the other side." },
   ],
   // Group 4 — solo last line
   [

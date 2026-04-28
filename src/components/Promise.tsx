@@ -67,7 +67,6 @@ export default function Promise() {
   const groupRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
-    // Animate label first
     gsap.from(labelRef.current, {
       opacity: 0,
       y: 20,
@@ -77,33 +76,36 @@ export default function Promise() {
         trigger: container.current,
         start: "top 80%",
         once: true,
-      } as ScrollTrigger.Vars,
+      },
     });
-
-    // Each group gets its own ScrollTrigger
-    groupRefs.current.forEach((groupEl, i) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container.current,
+        start: "top top",
+        end: "+=300%", // more scroll distance = clearer step-by-step reveal
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+      },
+    });
+    groupRefs.current.forEach((groupEl, index) => {
       if (!groupEl) return;
       const lines = groupEl.querySelectorAll(".line-item");
-
-      // Start hidden
-      gsap.set(lines, { opacity: 0, y: 30 });
-
-      ScrollTrigger.create({
-        trigger: groupEl,
-        start: "top 87%",
-        once: true,
-        onEnter: () => {
-          gsap.to(lines, {
-            opacity: 1,
-            y: 0,
-            duration: 0.85,
-            stagger: 0.1,
-            ease: "power3.out",
-          });
-        },
+      gsap.set(lines, { opacity: 0, y: 40 });
+      // add scroll gap before each group, except the first
+      if (index !== 0) {
+        tl.to({}, { duration: 0.6 });
+      }
+      tl.to(lines, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.18,
+        ease: "power3.out",
       });
+      // hold the revealed group before next scroll reveal
+      tl.to({}, { duration: 0.45 });
     });
-
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
@@ -111,10 +113,11 @@ export default function Promise() {
 
   return (
     <section
+      id="our-promise"
       ref={container}
-      className="bg-[#F9F9F9] py-32 px-6 md:px-12 min-h-[60vh]"
+      className="bg-white py-32 px-6 md:px-12 min-h-screen flex items-center justify-center"
     >
-      <div className="max-w-6xl mx-auto flex flex-col items-start gap-0">
+      <div className="max-w-6xl mx-auto flex flex-col items-start gap-0 w-full">
         {/* Label */}
         <div
           ref={labelRef}
@@ -124,22 +127,24 @@ export default function Promise() {
         </div>
 
         {/* Line groups */}
-        {LINES.map((group, gi) => (
-          <div
-            key={gi}
-            ref={(el) => { groupRefs.current[gi] = el; }}
-            className="mb-0"
-          >
-            {group.map((line, li) => (
-              <div
-                key={li}
-                className="line-item text-[clamp(24px,3.5vw,46px)] leading-[1.35] font-heading text-brand-heading tracking-[-0.5px] md:tracking-[-1px] font-medium"
-              >
-                {renderLine(line)}
-              </div>
-            ))}
-          </div>
-        ))}
+        <div className="w-full">
+          {LINES.map((group, gi) => (
+            <div
+              key={gi}
+              ref={(el) => { groupRefs.current[gi] = el; }}
+              className="mb-0"
+            >
+              {group.map((line, li) => (
+                <div
+                  key={li}
+                  className="line-item text-[clamp(24px,3.5vw,46px)] leading-[1.35] font-heading text-brand-heading tracking-[-0.5px] md:tracking-[-1px] font-medium"
+                >
+                  {renderLine(line)}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

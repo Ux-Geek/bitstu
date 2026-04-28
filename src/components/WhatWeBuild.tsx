@@ -27,7 +27,7 @@ export default function WhatWeBuild() {
   const sectionRef = useRef(null);
 
   return (
-    <section id="what-we-build" className="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="what-we-build" className="py-32 px-6 md:px-12 max-w-7xl mx-auto" ref={sectionRef}>
       <h2 className="mb-20">Agentic AI, built to spec.</h2>
       
       <div className="flex flex-col lg:flex-row gap-16 relative">

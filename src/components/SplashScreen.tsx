@@ -50,9 +50,11 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             >
               {isO ? (
                 <motion.span
-                  animate={isAmp ? { color: ["#FF5C00", "#111111", "#FF5C00"] } : {}}
-                  transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
-                  className={isAmp ? "inline-block" : ""}
+                  key={isAmp ? "amp" : "o"}
+                  initial={{ color: isAmp ? "#FF5C00" : "#111111" }}
+                  animate={{ color: "#111111" }}
+                  transition={{ duration: 1.2, ease: "easeInOut" }}
+                  className={isAmp ? "inline-block font-bold" : ""}
                 >
                   {isAmp ? "&" : "O"}
                 </motion.span>

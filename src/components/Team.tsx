@@ -32,22 +32,25 @@ export default function Team() {
               transition={{ delay: i * 0.2 }}
               className="group"
             >
-              <div className="aspect-[4/5] overflow-hidden rounded-2xl mb-8 grayscale group-hover:grayscale-0 transition-all duration-700">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-700">
                 <img 
                   src={member.image} 
                   alt={member.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-              </div>
-              <h3 className="text-2xl font-bold mb-1">{member.name}</h3>
-              <p className="text-brand-orange font-semibold mb-4">{member.role}</p>
-              <p className="text-brand-body font-body leading-relaxed mb-6">
-                {member.bio}
-              </p>
-              <div className="flex gap-4">
-                <Linkedin className="w-5 h-5 text-gray-400 hover:text-brand-blue cursor-pointer transition-colors" />
-                <Github className="w-5 h-5 text-gray-400 hover:text-black cursor-pointer transition-colors" />
-                <Mail className="w-5 h-5 text-gray-400 hover:text-brand-orange cursor-pointer transition-colors" />
+                {/* Dark overlay on hover */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Content overlay */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                  <h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
+                  <p className="text-brand-orange font-semibold mb-6">{member.role}</p>
+                  <div className="flex gap-4">
+                    <Linkedin className="w-5 h-5 text-white hover:text-brand-orange cursor-pointer transition-colors" />
+                    <Github className="w-5 h-5 text-white hover:text-brand-orange cursor-pointer transition-colors" />
+                    <Mail className="w-5 h-5 text-white hover:text-brand-orange cursor-pointer transition-colors" />
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}

@@ -43,7 +43,7 @@ export default function Navbar() {
           className="flex items-center justify-between w-full"
         >
           {/* Logo + Nav Links in the same bar */}
-          <div className="flex items-center gap-6 md:gap-8 bg-white/90 backdrop-blur-md border border-gray-200/80 rounded-full pl-5 pr-5 md:pr-7 py-2.5 shadow-sm">
+          <div className="flex items-center gap-6 md:gap-8 bg-white/90 backdrop-blur-md border border-gray-200/80 rounded-full pl-5 pr-5 md:pr-7 h-[55px] shadow-sm">
             {/* Logo + Brand Name */}
             <a href="/" className="flex items-center gap-2.5">
               <img
@@ -60,14 +60,14 @@ export default function Navbar() {
             <div className="hidden md:block w-px h-4 bg-gray-200"></div>
 
             {/* Nav links */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden md:flex items-center h-full gap-6">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
                   <a
                     key={link.id}
                     href={`#${link.id}`}
-                    className={`relative text-[14px] font-medium transition-colors ${
+                    className={`relative text-[14px] font-medium transition-colors h-full flex items-center ${
                       isActive ? "text-brand-heading" : "text-brand-body/60 hover:text-brand-heading/80"
                     }`}
                   >
@@ -75,7 +75,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeDot"
-                        className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand-heading"
+                        className="absolute bottom-3 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand-heading"
                       />
                     )}
                   </a>
@@ -85,7 +85,7 @@ export default function Navbar() {
           </div>
 
           {/* CTA on the other side */}
-          <div className="flex bg-white/90 backdrop-blur-md border border-gray-200/80 rounded-full p-1 shadow-sm">
+          <div className="flex items-center bg-white/90 backdrop-blur-md border border-gray-200/80 rounded-full px-2 h-[55px] shadow-sm">
              <button className="cta-primary">Book a Call</button>
           </div>
         </motion.nav>

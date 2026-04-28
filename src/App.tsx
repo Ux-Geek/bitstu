@@ -6,6 +6,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import SplashScreen from "./components/SplashScreen";
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Promise from "./components/Promise";
 import ImageBreak from "./components/ImageBreak";
@@ -26,6 +27,7 @@ export default function App() {
           </motion.div>
         ) : (
           <motion.div key="content" className="bg-white">
+            <Navbar />
             <Hero />
             <Promise />
             <ImageBreak />
